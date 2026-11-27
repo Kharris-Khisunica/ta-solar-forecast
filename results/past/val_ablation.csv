@@ -1,0 +1,17 @@
+mask,target,fitur_fisika,clipping,n,RMSE,nRMSE_%,MBE,pelanggaran_siang_%,pelanggaran_semua_jam_%
+valid,ghi,nofis,noclip,3289,124.833,26.006,1.306,0.36,51.952
+valid,ghi,nofis,clip,3289,124.829,26.006,1.29,0.36,51.952
+valid,ghi,fis,noclip,3289,124.704,25.979,0.175,0.192,51.906
+valid,ghi,fis,clip,3289,124.703,25.979,0.171,0.192,51.906
+valid,kc,nofis,noclip,3289,124.033,25.84,-0.395,0.0,0.0
+valid,kc,nofis,clip,3289,124.033,25.84,-0.395,0.0,0.0
+valid,kc,fis,noclip,3289,124.237,25.882,1.293,0.0,0.0
+valid,kc,fis,clip,3289,124.237,25.882,1.293,0.0,0.0
+all,ghi,nofis,noclip,4161,118.844,26.232,4.376,0.36,51.952
+all,ghi,nofis,clip,4161,118.838,26.231,4.352,0.36,51.952
+all,ghi,fis,noclip,4161,118.673,26.194,3.022,0.192,51.906
+all,ghi,fis,clip,4161,118.673,26.194,3.017,0.192,51.906
+all,kc,nofis,noclip,4161,118.331,26.119,2.246,0.0,0.0
+all,kc,nofis,clip,4161,118.331,26.119,2.246,0.0,0.0
+all,kc,fis,noclip,4161,118.236,26.098,3.664,0.0,0.0
+all,kc,fis,clip,4161,118.236,26.098,3.664,0.0,0.0

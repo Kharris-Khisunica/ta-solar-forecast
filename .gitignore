@@ -4,7 +4,8 @@ gdex_token.txt
 
 # Data & keluaran besar
 data/
-models/
+models/*
+!models/best_params.json
 *.grib2
 *.idx
 *.tar

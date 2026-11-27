@@ -1,0 +1,16 @@
+model,tingkat,metode,rho,ci_low,ci_high,n_kelompok
+xgb,fitur,SHAP,0.143,0.107,0.143,7.0
+xgb,fitur,LIME,0.143,0.143,0.143,7.0
+rf,fitur,SHAP,0.143,0.143,0.321,7.0
+rf,fitur,LIME,0.143,0.143,0.143,7.0
+xgb,kelompok,SHAP,0.143,0.0,0.143,7.0
+xgb,kelompok,LIME,0.143,0.0,0.143,7.0
+rf,kelompok,SHAP,0.107,0.107,0.143,7.0
+rf,kelompok,LIME,0.107,0.107,0.214,7.0
+lstm,kelompok,SHAP,-0.179,-0.214,-0.179,7.0
+lstm,kelompok,LIME,-0.179,-0.214,-0.179,7.0
+xgb,fitur,Jaccard top-3 SHAP vs LIME,1.0,,,
+rf,fitur,Jaccard top-3 SHAP vs LIME,1.0,,,
+xgb,kelompok,Jaccard top-3 SHAP vs LIME,1.0,,,
+rf,kelompok,Jaccard top-3 SHAP vs LIME,1.0,,,
+lstm,kelompok,Jaccard top-3 SHAP vs LIME,1.0,,,

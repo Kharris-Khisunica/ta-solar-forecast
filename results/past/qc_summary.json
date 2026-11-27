@@ -1,0 +1,16 @@
+{
+  "nsrdb_grid": [
+    "-6.88",
+    "107.61"
+  ],
+  "elev_m": "770",
+  "clear_samples": 28018,
+  "clear_noon_days": 108,
+  "delta_min": 1,
+  "convention": "instant",
+  "fill_flag_policy": "keep_flag",
+  "fill_pct_day_max_year": 18.019999999999996,
+  "solar_noon_median_abs_min": 3.952502775,
+  "hourly_lag_best": 0,
+  "T09_3_pass": true
+}

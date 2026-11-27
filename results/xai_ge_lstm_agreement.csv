@@ -1,0 +1,6 @@
+metode,pembanding,rho,ci_low,ci_high,n_kelompok,jaccard_top3
+Shapley kelompok eksak (utama),a priori,-0.179,-0.214,-0.179,7.0,
+GE sum|φ| kanal,a priori,0.0,0.0,0.0,7.0,
+GE |Σφ| kelompok,a priori,0.0,-0.143,0.071,7.0,
+GE sum|φ| kanal,Shapley kelompok eksak,0.536,,,,0.5
+GE |Σφ| kelompok,Shapley kelompok eksak,0.536,,,,0.5

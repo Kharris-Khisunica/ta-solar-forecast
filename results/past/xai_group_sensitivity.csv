@@ -1,0 +1,9 @@
+,a_priori,xgb | sum|φ| (utama),xgb | |Σφ|,xgb | sum|φ|/anggota,xgb | Shapley kelompok eksak,rf | sum|φ| (utama),rf | |Σφ|,rf | sum|φ|/anggota,rf | Shapley kelompok eksak
+nwp_radiasi,1.0,2.0,2.0,2.0,2.0,2.0,1.0,2.0,2.0
+nwp_awan,2.0,5.0,5.0,6.0,6.0,5.0,6.0,5.0,6.0
+klimatologi,3.0,6.0,4.0,1.0,4.0,6.0,3.0,1.0,5.0
+lag_observasi,4.0,4.0,6.0,5.0,5.0,4.0,5.0,4.0,4.0
+geometri_waktu,5.0,3.0,3.0,4.0,3.0,3.0,4.0,6.0,3.0
+termodinamika,6.0,1.0,1.0,3.0,1.0,1.0,2.0,3.0,1.0
+aerosol,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0,7.0
+Spearman ρ,,0.143,0.214,0.429,0.143,0.143,0.393,0.571,0.107

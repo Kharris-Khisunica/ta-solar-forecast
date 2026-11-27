@@ -1,0 +1,20 @@
+fitur,kelompok,aturan_waktu
+zenith,geometri,deterministik (jam target)
+cos_zenith,geometri,deterministik (jam target)
+ghi_cs,geometri,"deterministik, Ineichen + Linke klimatologi"
+ghi_extra,geometri,deterministik
+hour_sin,geometri,deterministik
+hour_cos,geometri,deterministik
+doy_sin,geometri,deterministik
+doy_cos,geometri,deterministik
+kc_same_hour_lag,lag observasi,"jam sama D-1 bila ≤ 12.00 WIB D-1, selain itu D-2"
+same_hour_from_d2,lag observasi,penanda sumber kc_same_hour_lag
+kc_mean_d1_to_issue,lag observasi,rata-rata k_c D-1 jam 01–12 WIB
+kc_mean_d1_morning,lag observasi,rata-rata k_c D-1 jam 08–12 WIB
+kc_mean_d2,lag observasi,rata-rata k_c D-2 penuh
+kc_at_issue,lag observasi,jam yang berakhir 12.00 WIB D-1
+temperature_at_issue,lag observasi,jam yang berakhir 12.00 WIB D-1
+relative_humidity_at_issue,lag observasi,jam yang berakhir 12.00 WIB D-1
+dew_point_at_issue,lag observasi,jam yang berakhir 12.00 WIB D-1
+aerosol_optical_depth_at_issue,lag observasi,jam yang berakhir 12.00 WIB D-1
+kc_clim,klimatologi,"rata-rata k_c bulan × jam, data latih 2016–2018"
