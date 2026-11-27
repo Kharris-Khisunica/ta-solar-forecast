@@ -1,0 +1,7 @@
+model,metode,rho,ci_low,ci_high,n_kelompok
+xgb,SHAP,0.143,0.107,0.143,7.0
+xgb,LIME,0.143,0.143,0.143,7.0
+rf,SHAP,0.143,0.143,0.321,7.0
+rf,LIME,0.143,0.143,0.143,7.0
+xgb,Jaccard top-3 SHAP vs LIME,1.0,,,
+rf,Jaccard top-3 SHAP vs LIME,1.0,,,

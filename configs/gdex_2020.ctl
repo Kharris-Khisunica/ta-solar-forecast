@@ -1,0 +1,11 @@
+datetype=init
+targetdir=/glade/scratch
+dataset=d084001
+date=201912310000/to/202012300000
+param=DSWRF/T CDC/TMP/R H/P WAT/CAPE
+level=SFC:0;EATM:0;LCY:0;MCY:0;HCY:0;HTGL:2
+product=18-hour Forecast/21-hour Forecast/24-hour Forecast/27-hour Forecast/30-hour Forecast/33-hour Forecast/36-hour Forecast/39-hour Forecast/6-hour Average (initial+12 to initial+18)/3-hour Average (initial+18 to initial+21)/6-hour Average (initial+18 to initial+24)/3-hour Average (initial+24 to initial+27)/6-hour Average (initial+24 to initial+30)/3-hour Average (initial+30 to initial+33)/6-hour Average (initial+30 to initial+36)/3-hour Average (initial+36 to initial+39)
+nlat=-6.39
+slat=-7.39
+wlon=107.11
+elon=108.11

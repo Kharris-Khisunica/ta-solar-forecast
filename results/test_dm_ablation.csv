@@ -1,0 +1,15 @@
+mask,vs_target,vs_fitur_fisika,vs_clipping,n_hari,mean_diff,DM,p,p_holm,signifikansi
+valid,ghi,nofis,noclip,366,-294.2145,-1.1883,0.2347,1.0,tidak signifikan
+valid,ghi,nofis,clip,366,-292.5454,-1.1814,0.2375,1.0,tidak signifikan
+valid,ghi,fis,noclip,366,73.5315,0.432,0.6657,1.0,tidak signifikan
+valid,ghi,fis,clip,366,73.5587,0.4322,0.6656,1.0,tidak signifikan
+valid,kc,nofis,noclip,366,68.6906,0.369,0.7121,1.0,tidak signifikan
+valid,kc,nofis,clip,366,68.6906,0.369,0.7121,1.0,tidak signifikan
+valid,kc,fis,noclip,366,0.0,0.0,1.0,1.0,tidak signifikan
+all,ghi,nofis,noclip,366,-325.6778,-1.5865,0.1126,0.7883,tidak signifikan
+all,ghi,nofis,clip,366,-322.3986,-1.5726,0.1158,0.7883,tidak signifikan
+all,ghi,fis,noclip,366,66.567,0.4801,0.6312,1.0,tidak signifikan
+all,ghi,fis,clip,366,66.5946,0.4803,0.631,1.0,tidak signifikan
+all,kc,nofis,noclip,366,35.64,0.2278,0.8198,1.0,tidak signifikan
+all,kc,nofis,clip,366,35.64,0.2278,0.8198,1.0,tidak signifikan
+all,kc,fis,noclip,366,0.0,0.0,1.0,1.0,tidak signifikan

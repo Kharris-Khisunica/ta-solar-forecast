@@ -1,0 +1,17 @@
+# Rahasia
+.env
+gdex_token.txt
+
+# Data & keluaran besar
+data/
+models/
+*.grib2
+*.idx
+*.tar
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.venv/

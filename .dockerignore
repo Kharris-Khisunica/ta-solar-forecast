@@ -1,0 +1,10 @@
+.env
+.git
+data/
+models/
+*.grib2
+*.tar
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+.venv/

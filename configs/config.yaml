@@ -1,0 +1,38 @@
+# Konfigurasi utama TA — Peramalan Iradiasi Surya (ML + XAI + Physical Consistency)
+# Semua skrip & notebook membaca file ini lewat src/utils.py: load_config()
+
+location:
+  name: "Kampus ITB Ganesha"
+  lat: -6.8899
+  lon: 107.6100
+  elevation_m: 770          # diisi otomatis dari header NSRDB (notebook 02, T06.3)
+
+data:
+  years: [2016, 2017, 2018, 2019, 2020]
+  nsrdb_interval_min: 10
+  split:
+    train: [2016, 2017, 2018]
+    val: [2019]
+    test: [2020]
+
+forecast:
+  issue_time_utc: "05:00"    # 12.00 WIB D-1
+  gfs_run_utc: 0             # run 00 UTC D-1
+  gfs_latency_h: 4.5          # jam setelah init sampai data tersedia (asumsi; verifikasi)
+  gfs_grid_point: [-7.00, 107.50]   # titik grid 0,25° terdekat (±17 km)
+
+physics:
+  zenith_max_deg: 85
+  k_max: 1.5747                # P99,9 k_c siang data latih (T11)
+  k_max_by_zenith: {edges: [0, 40, 60, 70, 75, 85], values: [1.0389, 1.0621, 1.1103, 1.1685, 1.7094]}
+  clearsky_ref: "ineichen"         # "ineichen" | "nsrdb" (T10)
+
+seed: 42
+
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  figures: figures
+  results: results
+  models: models

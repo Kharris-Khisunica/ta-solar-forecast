@@ -1,0 +1,9 @@
+,a_priori,porsi_kepentingan,porsi_kepentingan,porsi_kepentingan,porsi_kepentingan,peringkat,peringkat,peringkat,peringkat
+,,xgb_SHAP,xgb_LIME,rf_SHAP,rf_LIME,xgb_SHAP,xgb_LIME,rf_SHAP,rf_LIME
+nwp_radiasi,1,0.216,0.223,0.248,0.241,2,2,2,2
+nwp_awan,2,0.087,0.047,0.112,0.077,5,6,5,6
+klimatologi,3,0.079,0.106,0.094,0.122,6,4,6,4
+lag_observasi,4,0.119,0.077,0.139,0.097,4,5,4,5
+geometri_waktu,5,0.191,0.211,0.151,0.175,3,3,3,3
+termodinamika,6,0.292,0.319,0.25,0.283,1,1,1,1
+aerosol,7,0.015,0.016,0.007,0.005,7,7,7,7

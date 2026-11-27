@@ -1,0 +1,8 @@
+,xgb|fitur|LIME_std_antar_seed,xgb|fitur|SHAP_std_bootstrap,rf|fitur|LIME_std_antar_seed,rf|fitur|SHAP_std_bootstrap,xgb|kelompok|LIME_std_antar_seed,xgb|kelompok|SHAP_std_bootstrap,rf|kelompok|LIME_std_antar_seed,rf|kelompok|SHAP_std_bootstrap,lstm|kelompok|LIME_std_antar_seed,lstm|kelompok|SHAP_std_bootstrap
+nwp_radiasi,0.0,0.055,0.0,0.484,0.0,0.288,0.0,0.0,0.0,0.083
+nwp_awan,0.0,0.205,0.0,0.032,0.0,0.045,0.0,0.0,0.0,0.0
+klimatologi,0.0,0.205,0.0,0.032,0.0,0.203,0.483,0.533,0.0,0.326
+lag_observasi,0.0,0.0,0.0,0.126,0.0,0.208,0.483,0.537,0.0,0.326
+geometri_waktu,0.0,0.055,0.0,0.126,0.0,0.288,0.0,0.22,0.0,0.0
+termodinamika,0.0,0.0,0.0,0.484,0.0,0.0,0.0,0.0,0.0,0.0
+aerosol,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.083

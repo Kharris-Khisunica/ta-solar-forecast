@@ -1,0 +1,9 @@
+,a_priori,porsi,porsi,porsi,porsi,porsi,porsi,porsi,porsi,porsi,porsi,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat
+,,xgb|fitur|SHAP,xgb|fitur|LIME,rf|fitur|SHAP,rf|fitur|LIME,xgb|kelompok|SHAP,xgb|kelompok|LIME,rf|kelompok|SHAP,rf|kelompok|LIME,lstm|kelompok|SHAP,lstm|kelompok|LIME,xgb|fitur|SHAP,xgb|fitur|LIME,rf|fitur|SHAP,rf|fitur|LIME,xgb|kelompok|SHAP,xgb|kelompok|LIME,rf|kelompok|SHAP,rf|kelompok|LIME,lstm|kelompok|SHAP,lstm|kelompok|LIME
+nwp_radiasi,1,0.216,0.223,0.248,0.241,0.196,0.193,0.217,0.213,0.035,0.035,2,2,2,2,2,2,2,2,6,6
+nwp_awan,2,0.087,0.047,0.112,0.077,0.088,0.093,0.091,0.096,0.082,0.085,5,6,5,6,6,6,6,6,5,5
+klimatologi,3,0.079,0.106,0.094,0.122,0.125,0.126,0.127,0.127,0.14,0.139,6,4,6,4,4,4,5,5,3,3
+lag_observasi,4,0.119,0.077,0.139,0.097,0.108,0.109,0.128,0.127,0.131,0.127,4,5,4,5,5,5,4,4,4,4
+geometri_waktu,5,0.191,0.211,0.151,0.175,0.178,0.176,0.148,0.143,0.337,0.337,3,3,3,3,3,3,3,3,1,1
+termodinamika,6,0.292,0.319,0.25,0.283,0.285,0.283,0.281,0.285,0.248,0.248,1,1,1,1,1,1,1,1,2,2
+aerosol,7,0.015,0.016,0.007,0.005,0.02,0.021,0.008,0.009,0.028,0.028,7,7,7,7,7,7,7,7,7,7

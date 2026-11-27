@@ -1,0 +1,8 @@
+,xgb_LIME_std_peringkat_antar_seed,xgb_SHAP_std_peringkat_bootstrap,rf_LIME_std_peringkat_antar_seed,rf_SHAP_std_peringkat_bootstrap
+nwp_radiasi,0.0,0.055,0.0,0.484
+nwp_awan,0.0,0.205,0.0,0.032
+klimatologi,0.0,0.205,0.0,0.032
+lag_observasi,0.0,0.0,0.0,0.126
+geometri_waktu,0.0,0.055,0.0,0.126
+termodinamika,0.0,0.0,0.0,0.484
+aerosol,0.0,0.0,0.0,0.0

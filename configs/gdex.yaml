@@ -1,0 +1,28 @@
+# Konfigurasi request subset GFS 0.25° (NCAR GDEX d084001)
+# Dipakai oleh src/gfs_fetch.py
+
+dataset: d084001
+
+# Kampus ITB Ganesha (T03, 16 Nov 2026)
+location:
+  lat: -6.8899
+  lon: 107.6100
+box_half_width_deg: 0.5        # kotak ±0,5° di sekitar lokasi
+
+run_hour_utc: 0                # hanya run 00 UTC yang dipakai (run lain dibuang saat proses lokal)
+leads_h: [18, 21, 24, 27, 30, 33, 36, 39]
+
+test_month: "2020-01"          # uji 1 bulan (T07)
+years: [2016, 2017, 2018, 2019, 2020]   # request tahunan (T17); tiap tahun mulai 31 Des tahun sebelumnya
+
+# Variabel & level. Kode level WAJIB dicek terhadap template/metadata
+# (jalankan `check` dulu; `build` akan memberi peringatan bila tidak ditemukan).
+params:
+  avg:                         # variabel berlabel rata-rata 3/6 jam di GFS
+    DSWRF: ["SFC:0"]
+    TCDC:  ["EATM:0", "LCY:0", "MCY:0", "HCY:0"]
+  inst:                        # variabel instan
+    TMP:  ["HTGL:2"]
+    RH:   ["HTGL:2"]
+    PWAT: ["EATM:0"]
+    CAPE: ["SFC:0"]
