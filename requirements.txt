@@ -20,3 +20,4 @@ requests==2.34.2
 gdex-api-client==2.0.8
 pytest==9.2.0
 jupyter==1.1.1
+torch==2.15.0
