@@ -63,3 +63,49 @@ def test_group_lime_recovers_additive_contributions():
     fn = lambda Z: Z.astype(float) @ contrib.T + 7.0                    # noqa: E731
     coef = X.group_lime(fn, 3, n_samples=400, seed=1)
     assert np.allclose(coef, contrib, atol=1e-2)
+
+
+# ---------------------------------------------------------------- Shapley kelompok (dipindah dari lstm.py)
+def test_coalition_index_matches_order():
+    S = X.coalitions(4)
+    assert (X.coalition_index(S) == np.arange(16)).all()
+
+
+def test_shapley_from_values_matches_value_fn_route():
+    rng = np.random.default_rng(0)
+    contrib = rng.normal(size=(5, 4))
+    fn = lambda S: S.astype(float) @ contrib.T                             # noqa: E731  model aditif
+    phi, V = X.exact_group_shapley(fn, list("abcd"), return_values=True)
+    assert np.allclose(phi.to_numpy(), contrib)
+    assert np.allclose(X.shapley_from_values(V, 4), contrib)
+
+
+class _Lin:
+    """Model linear kecil dengan interaksi, berlaku seperti model sklearn (predict DataFrame)."""
+    def predict(self, d):
+        a = np.asarray(d, float)
+        return a[:, 0] + 2 * a[:, 1] - a[:, 2] + 0.5 * a[:, 0] * a[:, 2]
+
+
+def test_tabular_bg_with_single_mean_row_equals_point_baseline():
+    rng = np.random.default_rng(1)
+    Xd = pd.DataFrame(rng.normal(size=(6, 3)), columns=["f1", "f2", "f3"])
+    fmap = {"f1": "g1", "f2": "g2", "f3": "g1"}; groups = ["g1", "g2"]
+    bgmean = pd.Series([0.3, -0.2, 1.0], index=Xd.columns)
+    a = X.exact_group_shapley(X.tabular_value_fn(_Lin(), Xd, bgmean, fmap, groups), groups)
+    bg = np.broadcast_to(bgmean.to_numpy(), (6, 1, 3)).copy()
+    b = X.exact_group_shapley(X.tabular_value_fn_bg(_Lin(), Xd, bg, fmap, groups), groups)
+    assert np.allclose(a, b)
+
+
+def test_tabular_bg_distribution_is_efficient():
+    rng = np.random.default_rng(2)
+    Xd = pd.DataFrame(rng.normal(size=(4, 3)), columns=["f1", "f2", "f3"])
+    fmap = {"f1": "g1", "f2": "g2", "f3": "g3"}; groups = ["g1", "g2", "g3"]
+    bg = rng.normal(size=(4, 7, 3))
+    fn = X.tabular_value_fn_bg(_Lin(), Xd, bg, fmap, groups)
+    phi, V = X.exact_group_shapley(fn, groups, return_values=True)
+    full = _Lin().predict(Xd)
+    empty = _Lin().predict(bg.reshape(-1, 3)).reshape(4, 7).mean(1)
+    assert np.allclose(V[-1], full) and np.allclose(V[0], empty)
+    assert np.allclose(phi.sum(axis=1), full - empty)                     # efisiensi

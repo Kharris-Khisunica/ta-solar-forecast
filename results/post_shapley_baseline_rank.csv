@@ -1,0 +1,8 @@
+,xgb|rata-rata,xgb|distribusi,rf|rata-rata,rf|distribusi,lstm|rata-rata,lstm|distribusi,lstm|GradientExplainer
+nwp_radiasi,2,2,2,2,6,5,5
+nwp_awan,6,3,6,3,5,2,2
+klimatologi,4,6,5,5,3,3,4
+lag_observasi,5,5,4,4,4,7,7
+geometri_waktu,3,4,3,6,1,4,3
+termodinamika,1,1,1,1,2,1,1
+aerosol,7,7,7,7,7,6,6

@@ -1,0 +1,12 @@
+model,pembanding,rho,jaccard_top3,ci_low,ci_high,n_kelompok
+xgb,rata-rata vs distribusi,0.75,0.5,,,
+xgb,rata-rata vs a priori,0.143,,0.0,0.143,7.0
+xgb,distribusi vs a priori,0.321,,0.214,0.429,7.0
+rf,rata-rata vs distribusi,0.679,0.5,,,
+rf,rata-rata vs a priori,0.107,,0.107,0.143,7.0
+rf,distribusi vs a priori,0.429,,0.321,0.464,7.0
+lstm,rata-rata vs distribusi,0.464,0.5,,,
+lstm,rata-rata vs a priori,-0.179,,-0.214,-0.179,7.0
+lstm,distribusi vs a priori,0.071,,-0.107,0.179,7.0
+lstm,rata-rata vs GradientExplainer,0.536,0.5,,,
+lstm,distribusi vs GradientExplainer,0.964,0.5,,,

@@ -1,0 +1,31 @@
+{
+  "python": "3.13.5",
+  "platform": "Windows-11-10.0.26320-SP0",
+  "git_head": "5823639c8056ef5dcc323f615b07cc98c6603951",
+  "git_dirty": true,
+  "paket": {
+    "pandas": "2.3.2",
+    "numpy": "2.2.6",
+    "pvlib": "0.16.1",
+    "scikit-learn": "1.7.2",
+    "xgboost": "3.0.5",
+    "shap": "0.51.0",
+    "lime": "0.2.0.1",
+    "optuna": "5.0.0",
+    "xarray": "2026.9.0",
+    "cfgrib": "0.9.15.1",
+    "eccodes": "2.42.0",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "pyarrow": "20.0.0",
+    "pyyaml": "6.0.3",
+    "python-dotenv": "1.2.4",
+    "requests": "2.34.2",
+    "gdex-api-client": "2.0.8",
+    "pytest": "9.2.0",
+    "jupyter": "1.1.1",
+    "torch": "2.15.0"
+  },
+  "beda_dari_requirements": {},
+  "waktu": "2026-11-28 01:26:55"
+}

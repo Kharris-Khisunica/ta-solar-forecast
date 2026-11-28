@@ -6,6 +6,9 @@ dan urutan a priori (configs/apriori_order.yaml), dengan CI bootstrap atas sampe
 """
 from __future__ import annotations
 
+import itertools
+import math
+
 import numpy as np
 import pandas as pd
 import yaml
@@ -132,3 +135,77 @@ def group_lime(value_fn, M: int, n_samples: int = 1000, seed: int = 0, kernel_wi
     B = Xd.T @ (w[:, None] * y)
     coef = np.linalg.solve(A, B)                                  # (M+1) × S
     return coef[1:].T
+
+
+# ---------------------------------------------------------------- Shapley kelompok eksak (dipindah dari lstm.py)
+def coalitions(M: int) -> np.ndarray:
+    """Semua 2^M koalisi (bool, 2^M × M), urutan itertools.product: kelompok pertama paling lambat berubah."""
+    return np.array(list(itertools.product([0, 1], repeat=M)), dtype=bool)
+
+
+def coalition_index(present) -> np.ndarray:
+    """Indeks baris koalisi di coalitions(M): Σ s_g · 2^(M−1−g). present: bool [..., M]."""
+    present = np.asarray(present, dtype=bool)
+    M = present.shape[-1]
+    return present.astype(np.int64) @ (1 << np.arange(M - 1, -1, -1))
+
+
+def shapley_from_values(V: np.ndarray, M: int) -> np.ndarray:
+    """Nilai Shapley eksak dari matriks nilai koalisi V [2^M, S] (urutan coalitions(M)) → φ [S, M]."""
+    V = np.asarray(V, float)
+    subsets = coalitions(M)
+    fact = [math.factorial(k) for k in range(M + 1)]
+    phi = np.zeros((V.shape[1], M))
+    for g in range(M):
+        absent = ~subsets[:, g]
+        s = subsets[absent]
+        k = s.sum(axis=1)
+        w = np.array([fact[kk] * fact[M - kk - 1] / fact[M] for kk in k])
+        with_g = s.copy(); with_g[:, g] = True
+        phi[:, g] = (w[:, None] * (V[coalition_index(with_g)] - V[coalition_index(s)])).sum(axis=0)
+    return phi
+
+
+def exact_group_shapley(value_fn, groups: list[str], return_values: bool = False):
+    """value_fn(present: bool [2^M, M]) → array [2^M, n_sampel] nilai model tiap koalisi.
+    Mengembalikan φ (n_sampel × M). Sifat efisiensi: Σφ = v(semua) − v(kosong).
+    return_values=True → juga mengembalikan V (untuk uji faithfulness tanpa menghitung ulang)."""
+    M = len(groups)
+    V = np.asarray(value_fn(coalitions(M)))
+    phi = pd.DataFrame(shapley_from_values(V, M), columns=groups)
+    return (phi, V) if return_values else phi
+
+
+def tabular_value_fn(model, X: pd.DataFrame, background: pd.Series, fmap: dict, groups):
+    """Koalisi → prediksi model tabular; fitur kelompok absen diganti rata-rata data latih (satu titik)."""
+    cols_by_g = {g: [c for c in X.columns if fmap.get(c) == g] for g in groups}
+
+    def fn(subsets):
+        res = []
+        for s in subsets:
+            Xm = X.copy()
+            for gi, g in enumerate(groups):
+                if not s[gi]:
+                    Xm[cols_by_g[g]] = background[cols_by_g[g]].to_numpy()
+            res.append(model.predict(Xm))
+        return np.array(res)
+    return fn
+
+
+def tabular_value_fn_bg(model, X: pd.DataFrame, bg: np.ndarray, fmap: dict, groups):
+    """Seperti tabular_value_fn, tetapi latar = DISTRIBUSI: bg [n_sampel, K, n_fitur] (kolom = X.columns).
+    Nilai koalisi = rata-rata prediksi atas K baris latar (Shapley intervensional)."""
+    n, K, p = bg.shape
+    assert n == len(X) and p == X.shape[1]
+    Xr = np.repeat(X.to_numpy(float), K, axis=0)                  # baris i*K + k = sampel i, latar k
+    Br = bg.reshape(n * K, p).astype(float)
+    gidx = np.array([groups.index(fmap[c]) if fmap.get(c) in groups else -1 for c in X.columns])
+
+    def fn(subsets):
+        res = []
+        for s in subsets:
+            keep = np.array([True if g < 0 else bool(s[g]) for g in gidx])
+            Xm = pd.DataFrame(np.where(keep[None, :], Xr, Br), columns=X.columns)
+            res.append(np.asarray(model.predict(Xm), float).reshape(n, K).mean(axis=1))
+        return np.array(res)
+    return fn

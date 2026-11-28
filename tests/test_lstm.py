@@ -91,3 +91,23 @@ def test_save_load_roundtrip(data, tmp_path):
     fn = L.lstm_value_fn_days(net, xs[:3], xt[:3], seq_g, tgt_g, groups)
     v = fn(np.ones((1, len(groups)), bool))
     assert v.shape == (1, 3 * 24) and np.allclose(v[0], L.predict(net, xs[:3], xt[:3]).ravel())
+
+
+def test_lstm_bg_value_fn_matches_point_baseline(data):
+    pytest.importorskip("torch")
+    hourly, table = data
+    A = L.build_arrays(hourly, table)
+    tr, va = np.where(A["split"] == "train")[0], np.where(A["split"] == "val")[0]
+    xs, xt = L.Normalizer().fit(A, tr).transform(A)
+    p = {"hidden": 8, "layers": 1, "dropout": 0.0, "lr": 1e-3, "batch": 32}
+    net, _ = L.train(p, xs, xt, A["y"], A["w_train"], A["w_eval"], tr, va, seed=0, max_epochs=2)
+    groups = ["lag_observasi", "geometri_waktu", "termodinamika", "nwp_radiasi", "klimatologi"]
+    seq_g = [L.SEQ_GROUPS[c] for c in A["seq_ch"]]; tgt_g = [L.TGT_GROUPS[c] for c in A["tgt_ch"]]
+    hrs = np.array([10, 12, 14])
+    a = L.exact_group_shapley(L.lstm_value_fn(net, xs[:3], xt[:3], hrs, seq_g, tgt_g, groups), groups)
+    zs, zt = np.zeros_like(xs[:1]), np.zeros_like(xt[:1])                 # satu hari latar = 0 = rata-rata latih
+    b = L.exact_group_shapley(L.lstm_value_fn_bg(net, xs[:3], xt[:3], hrs, seq_g, tgt_g, groups, zs, zt), groups)
+    assert np.allclose(a, b, atol=1e-6)
+    phi, V = L.exact_group_shapley(L.lstm_value_fn_bg(net, xs[:3], xt[:3], hrs, seq_g, tgt_g, groups,
+                                                      xs[tr[:4]], xt[tr[:4]]), groups, return_values=True)
+    assert np.allclose(phi.sum(axis=1), V[-1] - V[0], atol=1e-5)          # efisiensi dengan latar distribusi

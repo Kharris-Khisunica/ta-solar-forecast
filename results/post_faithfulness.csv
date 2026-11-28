@@ -1,0 +1,35 @@
+model,operator_hapus,metode,deletion_AUC,insertion_AUC,deletion_AUC_norm,insertion_AUC_norm,deletion_vs_acak,insertion_vs_acak,keuntungan_kandang
+xgb,rata-rata,acak (pembanding),0.0792,0.07917,0.57494,0.57473,,,
+xgb,rata-rata,TreeSHAP (fitur→kelompok),0.11346,0.04276,0.82362,0.3104,0.03426,-0.03641,False
+xgb,rata-rata,LIME fitur (→kelompok),0.10854,0.05345,0.78795,0.38799,0.02934,-0.02572,False
+xgb,rata-rata,Shapley kelompok (rata-rata),0.12094,0.03436,0.87795,0.24945,0.04174,-0.04481,True
+xgb,rata-rata,Shapley kelompok (distribusi),0.11001,0.05027,0.79857,0.36494,0.03081,-0.0289,False
+xgb,rata-rata,LIME kelompok,0.12072,0.03378,0.87634,0.2452,0.04152,-0.04539,False
+xgb,distribusi,acak (pembanding),0.06087,0.06085,0.57786,0.57766,,,
+xgb,distribusi,TreeSHAP (fitur→kelompok),0.08371,0.03683,0.79477,0.34961,0.02285,-0.02402,False
+xgb,distribusi,LIME fitur (→kelompok),0.08177,0.03979,0.77635,0.37775,0.02091,-0.02106,False
+xgb,distribusi,Shapley kelompok (rata-rata),0.08687,0.03452,0.82473,0.32774,0.026,-0.02632,False
+xgb,distribusi,Shapley kelompok (distribusi),0.0937,0.02513,0.88961,0.23854,0.03284,-0.03572,True
+xgb,distribusi,LIME kelompok,0.08668,0.03422,0.82292,0.32488,0.02581,-0.02663,False
+rf,rata-rata,acak (pembanding),0.07741,0.07713,0.57473,0.57267,,,
+rf,rata-rata,TreeSHAP (fitur→kelompok),0.10729,0.04434,0.79658,0.32919,0.02988,-0.03279,False
+rf,rata-rata,LIME fitur (→kelompok),0.10365,0.05406,0.76957,0.40138,0.02624,-0.02307,False
+rf,rata-rata,Shapley kelompok (rata-rata),0.1121,0.03879,0.8323,0.28803,0.03469,-0.03834,True
+rf,rata-rata,Shapley kelompok (distribusi),0.10609,0.05089,0.78768,0.37787,0.02868,-0.02624,False
+rf,rata-rata,LIME kelompok,0.11214,0.03855,0.8326,0.28623,0.03473,-0.03858,False
+rf,distribusi,acak (pembanding),0.05837,0.05871,0.56562,0.56893,,,
+rf,distribusi,TreeSHAP (fitur→kelompok),0.08277,0.03282,0.80211,0.31804,0.0244,-0.02589,False
+rf,distribusi,LIME fitur (→kelompok),0.07884,0.03662,0.76404,0.35491,0.02048,-0.02209,False
+rf,distribusi,Shapley kelompok (rata-rata),0.08495,0.03241,0.82315,0.31405,0.02658,-0.0263,False
+rf,distribusi,Shapley kelompok (distribusi),0.09074,0.02464,0.87929,0.23876,0.03237,-0.03407,True
+rf,distribusi,LIME kelompok,0.08517,0.03188,0.82535,0.30894,0.0268,-0.02683,False
+lstm,rata-rata,acak (pembanding),0.13898,0.13848,0.54792,0.54596,,,
+lstm,rata-rata,Shapley kelompok (rata-rata),0.22312,0.05195,0.87968,0.20481,0.08415,-0.08653,True
+lstm,rata-rata,Shapley kelompok (distribusi),0.16773,0.10567,0.66129,0.41661,0.02875,-0.03281,False
+lstm,rata-rata,LIME kelompok,0.22228,0.05066,0.87634,0.19973,0.0833,-0.08782,False
+lstm,rata-rata,GradientExplainer (|Σφ| kelompok),0.16939,0.10465,0.66782,0.41259,0.03041,-0.03383,False
+lstm,distribusi,acak (pembanding),0.07192,0.07209,0.60593,0.60739,,,
+lstm,distribusi,Shapley kelompok (rata-rata),0.09333,0.04937,0.78634,0.4159,0.02141,-0.02273,False
+lstm,distribusi,Shapley kelompok (distribusi),0.10853,0.02867,0.91438,0.24157,0.03661,-0.04342,True
+lstm,distribusi,LIME kelompok,0.09434,0.04766,0.79484,0.40153,0.02242,-0.02443,False
+lstm,distribusi,GradientExplainer (|Σφ| kelompok),0.10615,0.03019,0.89433,0.25435,0.03423,-0.0419,False

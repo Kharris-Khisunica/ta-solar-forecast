@@ -1,0 +1,9 @@
+,a_priori,porsi,porsi,porsi,porsi,porsi,porsi,porsi,porsi,porsi,porsi,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat,peringkat
+,,xgb|TreeSHAP fitur|2019,xgb|TreeSHAP fitur|2020,rf|TreeSHAP fitur|2019,rf|TreeSHAP fitur|2020,xgb|Shapley kelompok|2019,xgb|Shapley kelompok|2020,rf|Shapley kelompok|2019,rf|Shapley kelompok|2020,lstm|Shapley kelompok|2019,lstm|Shapley kelompok|2020,xgb|TreeSHAP fitur|2019,xgb|TreeSHAP fitur|2020,rf|TreeSHAP fitur|2019,rf|TreeSHAP fitur|2020,xgb|Shapley kelompok|2019,xgb|Shapley kelompok|2020,rf|Shapley kelompok|2019,rf|Shapley kelompok|2020,lstm|Shapley kelompok|2019,lstm|Shapley kelompok|2020
+nwp_radiasi,1,0.224,0.216,0.26,0.248,0.197,0.196,0.228,0.217,0.047,0.035,2,2,1,2,2,2,2,2,6,6
+nwp_awan,2,0.079,0.087,0.103,0.112,0.075,0.088,0.089,0.091,0.065,0.082,6,5,5,5,6,6,6,6,5,5
+klimatologi,3,0.086,0.079,0.099,0.094,0.132,0.125,0.13,0.127,0.157,0.14,5,6,6,6,4,4,4,5,3,3
+lag_observasi,4,0.109,0.119,0.123,0.139,0.097,0.108,0.113,0.128,0.126,0.131,4,4,4,4,5,5,5,4,4,4
+geometri_waktu,5,0.186,0.191,0.153,0.151,0.169,0.178,0.151,0.148,0.266,0.337,3,3,3,3,3,3,3,3,2,1
+termodinamika,6,0.299,0.292,0.253,0.25,0.311,0.285,0.28,0.281,0.318,0.248,1,1,2,1,1,1,1,1,1,2
+aerosol,7,0.017,0.015,0.009,0.007,0.018,0.02,0.009,0.008,0.021,0.028,7,7,7,7,7,7,7,7,7,7

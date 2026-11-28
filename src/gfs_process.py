@@ -202,3 +202,11 @@ def alignment_by_shift(ghi_nwp_by_label: pd.Series, ghi_obs: pd.Series, mask: pd
     """Korelasi GHI_nwp vs GHI observasi untuk pergeseran k jam (jam siang). Maksimum harus di 0."""
     idx = mask[mask].index
     return pd.Series({k: ghi_nwp_by_label.reindex(idx).corr(ghi_obs.shift(k).reindex(idx)) for k in shifts}, name="r")
+
+
+def assert_aligned(r: pd.Series) -> int:
+    """Uji alignment (T09.3/T18.6): korelasi maksimum harus di pergeseran 0. r = keluaran alignment_by_shift."""
+    best = int(r.idxmax())
+    if best != 0:
+        raise AssertionError(f"Korelasi maksimum di pergeseran {best:+d} jam, bukan 0 — data tidak selaras")
+    return best

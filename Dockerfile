@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.13-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -17,4 +17,8 @@ COPY . .
 
 # Data dan .env TIDAK ikut image (lihat .dockerignore); mount saat run:
 #   docker run --rm -v "$PWD/data:/app/data" --env-file .env ta-solar-forecast
-CMD ["pytest", "-q"]
+# Default: jalankan tes. Pipeline penuh (butuh data/ ter-mount):
+#   docker run --rm -v "$PWD/data:/app/data" -v "$PWD/models:/app/models" -v "$PWD/.git:/app/.git" \
+#       ta-solar-forecast python scripts/run_all.py --kernel python3
+#   (.git perlu di-mount karena 09 memeriksa commit urutan a priori)
+CMD ["pytest", "-q", "tests"]

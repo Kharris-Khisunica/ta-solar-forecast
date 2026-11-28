@@ -1,0 +1,6 @@
+model,metode,rho_2019_vs_2020,jaccard_top3_2019_vs_2020,rho_apriori_2019,rho_apriori_2020
+xgb,TreeSHAP fitur,0.964,1.0,0.107,0.143
+rf,TreeSHAP fitur,0.964,1.0,0.321,0.143
+xgb,Shapley kelompok,1.0,1.0,0.143,0.143
+rf,Shapley kelompok,0.964,1.0,0.143,0.107
+lstm,Shapley kelompok,0.964,1.0,-0.214,-0.179

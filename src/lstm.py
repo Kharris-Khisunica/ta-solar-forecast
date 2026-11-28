@@ -7,7 +7,6 @@ Keluaran: k_c per jam; loss hanya pada jam siang. Normalisasi di-fit pada hari l
 """
 from __future__ import annotations
 
-import itertools
 import math
 
 import numpy as np
@@ -129,6 +128,7 @@ def set_torch_seed(seed: int):
     torch = _torch()
     torch.manual_seed(seed)
     np.random.seed(seed)
+    torch.use_deterministic_algorithms(True, warn_only=True)   # A5: pilih algoritma deterministik bila ada
     torch.set_num_threads(max(1, torch.get_num_threads()))
 
 
@@ -195,24 +195,9 @@ def search_space(trial) -> dict:
 
 
 # ------------------------------------------------------------------ Shapley eksak tingkat kelompok
-def exact_group_shapley(value_fn, groups: list[str]) -> pd.DataFrame:
-    """value_fn(present: bool array [2^M, M]) → array [2^M, n_sampel] nilai model untuk tiap koalisi.
-    Mengembalikan φ (n_sampel × M). Sifat efisiensi: Σφ = v(semua) − v(kosong)."""
-    M = len(groups)
-    subsets = np.array(list(itertools.product([0, 1], repeat=M)), dtype=bool)   # 2^M × M
-    v = np.asarray(value_fn(subsets))                                             # 2^M × S
-    key = {tuple(s): i for i, s in enumerate(subsets.astype(int))}
-    phi = np.zeros((v.shape[1], M))
-    fact = [math.factorial(k) for k in range(M + 1)]
-    for g in range(M):
-        for s in subsets:
-            if s[g]:
-                continue
-            k = int(s.sum())
-            wgt = fact[k] * fact[M - k - 1] / fact[M]
-            s_with = s.copy(); s_with[g] = True
-            phi[:, g] += wgt * (v[key[tuple(s_with.astype(int))]] - v[key[tuple(s.astype(int))]])
-    return pd.DataFrame(phi, columns=groups)
+# exact_group_shapley & tabular_value_fn dipindah ke xai.py (dipakai ketiga model); diekspor ulang di sini
+# agar kode lama yang memanggil L.exact_group_shapley tetap jalan.
+from xai import exact_group_shapley, tabular_value_fn  # noqa: E402,F401
 
 
 def lstm_value_fn(net, xs, xt, hour_idx, seq_groups, tgt_groups, groups):
@@ -267,5 +252,28 @@ def lstm_value_fn_days(net, xs, xt, seq_groups, tgt_groups, groups):
             ms = np.array([s[i] if i >= 0 else True for i in seq_g], dtype=np.float32)
             mt = np.array([s[i] if i >= 0 else True for i in tgt_g], dtype=np.float32)
             res.append(predict(net, (xs * ms).astype(np.float32), (xt * mt).astype(np.float32)).ravel())
+        return np.array(res)
+    return fn
+
+
+def lstm_value_fn_bg(net, xs, xt, hour_idx, seq_groups, tgt_groups, groups, bg_xs, bg_xt):
+    """Seperti lstm_value_fn, tetapi latar = DISTRIBUSI hari: bg_xs [K, 48, c_enc], bg_xt [K, 24, c_dec].
+    Kanal kelompok absen diambil dari hari latar (utuh, sehingga kanal jam tetap selaras);
+    nilai koalisi = rata-rata keluaran atas K hari latar."""
+    n, K = len(xs), len(bg_xs)
+    seq_g = np.array([groups.index(g) if g in groups else -1 for g in seq_groups])
+    tgt_g = np.array([groups.index(g) if g in groups else -1 for g in tgt_groups])
+    xs_r, xt_r = np.repeat(xs, K, axis=0), np.repeat(xt, K, axis=0)        # baris i*K + k
+    bs_r, bt_r = np.tile(bg_xs, (n, 1, 1)), np.tile(bg_xt, (n, 1, 1))
+    h_r = np.repeat(np.asarray(hour_idx), K)
+
+    def fn(subsets):
+        res = []
+        for s in subsets:
+            ms = np.array([True if i < 0 else bool(s[i]) for i in seq_g])
+            mt = np.array([True if i < 0 else bool(s[i]) for i in tgt_g])
+            p = predict(net, np.where(ms[None, None, :], xs_r, bs_r).astype(np.float32),
+                        np.where(mt[None, None, :], xt_r, bt_r).astype(np.float32))
+            res.append(p[np.arange(n * K), h_r].reshape(n, K).mean(axis=1))
         return np.array(res)
     return fn

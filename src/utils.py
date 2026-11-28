@@ -26,16 +26,15 @@ def path(key: str, cfg: dict | None = None) -> Path:
 
 
 def set_seed(seed: int | None = None) -> int:
-    """Seed untuk random, numpy, dan tensorflow (bila terpasang). Panggil di awal setiap skrip."""
+    """Seed untuk random, numpy, dan PyTorch (bila terpasang). Panggil di awal setiap notebook."""
     if seed is None:
         seed = int(load_config()["seed"])
     os.environ["PYTHONHASHSEED"] = str(seed)
     random.seed(seed)
     np.random.seed(seed)
     try:
-        import tensorflow as tf
-        tf.random.set_seed(seed)
-        tf.keras.utils.set_random_seed(seed)
+        import torch
+        torch.manual_seed(seed)
     except ImportError:
         pass
     return seed

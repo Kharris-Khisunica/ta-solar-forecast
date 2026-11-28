@@ -1,0 +1,4 @@
+pasangan,selisih_seed42,rata2_selisih,min,maks,%_pasangan_a_lebih_buruk,std_seed_a,std_seed_b
+lstm − rf,3.755,3.151,1.693,4.336,100.0,0.763,0.11
+lstm − xgb,2.743,2.114,0.27,3.446,100.0,0.763,0.326
+xgb − rf,1.012,1.037,0.442,1.87,100.0,0.326,0.11

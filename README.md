@@ -10,7 +10,21 @@ docker build -t ta-solar-forecast .
 docker run --rm -v "$PWD/data:/app/data" --env-file .env ta-solar-forecast   # menjalankan pytest
 ```
 
-Tanpa Docker: `pip install -r requirements.txt && pytest -q`.
+Tanpa Docker: `pip install -r requirements.txt && pytest -q tests`.
+
+## Reproduksi satu perintah
+
+```bash
+python scripts/run_all.py                 # 03 → 09, berhenti bila ada cek yang gagal
+python scripts/run_all.py --with-post     # + 10_post_analysis
+python scripts/run_all.py --from 07 --to 08
+```
+
+Cek otomatis: sel error; 03 `T09.3 LULUS`; 04 `config.yaml` tidak berubah; 06 `T18.6 LULUS`;
+07 `✓ identik dengan run sebelumnya`; 09 urutan a priori ter-commit. Keluaran:
+`results/run_all_log.json` (status & file yang berubah), `results/environment.json` (versi paket vs
+`requirements.txt`), `results/key_numbers.json` (angka kunci laporan, dari `src/report.py`).
+01 & 02 tidak ikut karena mengakses server luar; di 01 ada sakelar `RUN_REMOTE = False`.
 
 ## Urutan notebook
 
@@ -24,18 +38,20 @@ Tanpa Docker: `pip install -r requirements.txt && pytest -q`.
 | 06 | gfs_process | De-averaging, per jam, gabung GFS | data/processed/features_all.parquet |
 | 07 | **train_models** | Baseline, RF, XGB, LSTM, ablasi (latih & simpan) | models/, predictions.parquet |
 | 08 | **evaluate** | Semua metrik, DM, CI, ablasi, stratifikasi, diagnosis | results/test_*.csv, figures/ |
-| 09 | **xai** | SHAP & LIME untuk RF, XGB, LSTM; kesesuaian a priori | results/xai_*.csv, figures/xai_* |
+| 09 | **xai** | SHAP & LIME untuk RF, XGB, LSTM; kesesuaian a priori; §8 GradientExplainer LSTM | results/xai_*.csv, figures/xai_* |
+| 10 | post_analysis | *Pasca-hasil:* variasi seed, sensitivitas baseline Shapley, XAI val 2019, faithfulness, bias | results/post_*.csv, figures/post_* |
 
-Notebook lama ada di `notebooks/arsip/` (tidak dipakai lagi).
+Hasil run sebelum konsolidasi ada di `results/past/` (termasuk `optuna_*.csv` dan `test_run_log.json`).
 
 ## Struktur
 
 ```
 configs/      config.yaml, gdex.yaml, apriori_order.yaml
 data/         raw/ interim/ processed/   (tidak di-commit)
-notebooks/    01–09 (lihat tabel di atas), arsip/
-src/          utils, gfs_fetch, clearsky, features, gfs_process, evaluate, models, lstm, xai
-tests/        pytest (53 tes)
+notebooks/    01–10 (lihat tabel di atas)
+src/          utils, gfs_fetch, clearsky, features, gfs_process, evaluate, models, lstm, xai, report
+scripts/      run_all.py
+tests/        pytest (61 tes)
 models/       best_params.json, xgb_best.json, rf_best.joblib, lstm_best.pt, lstm_normalizer.npz
 figures/ results/
 decisions.md  log keputusan teknis (bahan Bab III)
